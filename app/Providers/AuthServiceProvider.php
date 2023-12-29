@@ -4,8 +4,10 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 use App\Models\Person;
+use App\Models\Tag;
 use App\Models\User;
 use App\Policies\PersonPolicy;
+use App\Policies\TagPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -20,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
         //
         Person::class => PersonPolicy::class,
         User::class   => UserPolicy::class,
+        Tag::class    => TagPolicy::class,
     ];
 
     /**

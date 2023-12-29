@@ -61,5 +61,17 @@ Route::prefix('/control')->name('control.')->group(function () {
                  Route::post('{user}/update', Control\Users\SaveController::class)->name('update');
                  Route::post('{user}/remove', Control\Users\RemoveController::class)->name('remove');
              });
+
+        Route::prefix('tags')
+             ->name('tags.')
+             ->middleware('can:viewAny,\App\Models\Tag')
+             ->group(function () {
+                 Route::get('', Control\Tags\ListController::class)->name('list');
+                 Route::get('create', Control\Tags\EditController::class)->name('create');
+                 Route::post('save', Control\Tags\SaveController::class)->name('save');
+                 Route::get('{tag}/edit', Control\Tags\EditController::class)->name('edit');
+                 Route::post('{tag}/update', Control\Tags\SaveController::class)->name('update');
+                 Route::post('{tag}/remove', Control\Tags\RemoveController::class)->name('remove');
+             });
     });
 });

@@ -37,6 +37,15 @@
                         </a>
                     </li>
                 @endcan
+
+                @can('viewAny', \App\Models\Tag::class)
+                    <li @if (Route::currentRouteName() == 'control.tags.list') class="active" @endif>
+                        <a href="{{ route('control.tags.list') }}">
+                            <i class="bi bi-tag"></i>
+                            <span class="menu-text">{{ __('control.sidebar.tags') }}</span>
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </div>
     </div>

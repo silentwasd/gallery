@@ -1,6 +1,15 @@
 <?php
 
 return [
+    'common' => [
+        'create' => 'Create',
+        'edit'   => 'Edit',
+        'remove' => 'Remove',
+        'save'   => 'Save',
+        'id'     => 'ID',
+        'name'   => 'Name'
+    ],
+
     'auth' => [
         'text'           => 'Login to control panel',
         'email'          => 'E-mail',
@@ -12,7 +21,8 @@ return [
     'sidebar' => [
         'dashboard' => 'Dashboard',
         'persons'   => 'Persons',
-        'users'     => 'Users'
+        'users'     => 'Users',
+        'tags'      => 'Tags'
     ],
 
     'dashboard' => [
@@ -64,5 +74,11 @@ return [
     'user' => [
         'profile' => 'Profile',
         'logout'  => 'Logout'
+    ],
+
+    'tags' => [
+        'person_count' => 'Person count',
+        'create_tag'   => 'Create tag',
+        'edit_tag'     => 'Edit tag'
     ]
 ];
