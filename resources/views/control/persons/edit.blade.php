@@ -64,6 +64,13 @@
                                       rows="10">{{ $person?->description }}</textarea>
                         </div>
 
+                        <div class="mb-3">
+                            <label class="form-label" for="tags">{{ __('control.persons.tags') }}</label>
+                            <input class="form-control" id="tags" name="tags"
+                                   placeholder="{{ __('control.persons.tag_placeholder') }}"
+                                   value="{{ $person?->tags->map(fn(\App\Models\Tag $tag) => $tag->name)->implode(', ') }}" />
+                        </div>
+
                         <button class="btn btn-primary d-inline-flex align-items-center">
                             <i class="bi bi-check-lg me-1"></i>
                             {{ __('control.persons.save') }}

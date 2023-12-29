@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Control\Persons;
 
 use App\Http\Controllers\Controller;
 use App\Models\Person;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class SaveController extends Controller
@@ -12,7 +13,8 @@ class SaveController extends Controller
     {
         $validated = $request->validate([
             'nickname'    => 'required|string',
-            'description' => 'required|string'
+            'description' => 'required|string',
+            'tags'        => 'nullable|string'
         ]);
 
         if (!$person)
@@ -23,6 +25,21 @@ class SaveController extends Controller
 
         $person->save();
 
+        if ($validated['tags'] && $tags = $this->parseTags($validated['tags']))
+            $person->tags()->sync($tags);
+
         return redirect()->route('control.persons.edit', $person);
+    }
+
+    protected function parseTags(string $raw): array
+    {
+        return collect(explode(',', $raw))
+            ->map(fn(string $tag) => trim($tag))
+            ->unique()
+            ->mapWithKeys(function (string $tag, int $order) {
+                $id = Tag::createOrFirst(['name' => $tag])->id;
+                return [$id => ['order' => $order]];
+            })
+            ->all();
     }
 }

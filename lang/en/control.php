@@ -23,18 +23,20 @@ return [
     ],
 
     'persons' => [
-        'create'        => 'Create',
-        'edit'          => 'Edit',
-        'remove'        => 'Remove',
-        'save'          => 'Save',
-        'general'       => 'General',
-        'nickname'      => 'Nickname',
-        'description'   => 'Description',
-        'photos'        => 'Photos',
-        'upload'        => 'Upload',
-        'create_person' => 'Create person',
-        'edit_person'   => 'Edit person',
-        'states'        => [
+        'create'          => 'Create',
+        'edit'            => 'Edit',
+        'remove'          => 'Remove',
+        'save'            => 'Save',
+        'general'         => 'General',
+        'nickname'        => 'Nickname',
+        'description'     => 'Description',
+        'tags'            => 'Tags',
+        'tag_placeholder' => 'simple, short, clear tags',
+        'photos'          => 'Photos',
+        'upload'          => 'Upload',
+        'create_person'   => 'Create person',
+        'edit_person'     => 'Edit person',
+        'states'          => [
             'waiting'  => 'Waiting',
             'accepted' => 'Accepted',
             'rejected' => 'Rejected'
