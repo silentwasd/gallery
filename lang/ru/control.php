@@ -44,6 +44,7 @@ return [
         'upload'        => 'Загрузить',
         'create_person' => 'Создать анкету',
         'edit_person'   => 'Изменить анкету',
+        'tags'          => 'Теги',
         'states'        => [
             'waiting'  => 'Ожидание',
             'accepted' => 'Принято',
