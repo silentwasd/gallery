@@ -9,7 +9,9 @@ class ListController extends Controller
 {
     public function __invoke()
     {
-        $tags = Tag::all();
+        $tags = Tag::withCount('persons')
+                   ->orderByDesc('persons_count')
+                   ->get();
 
         return view('control.tags.list', compact('tags'));
     }
