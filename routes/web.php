@@ -41,7 +41,8 @@ Route::prefix('/control')->name('control.')->group(function () {
             Route::post('{person}/accept', Control\Persons\AcceptController::class)->name('accept');
             Route::post('{person}/reject', Control\Persons\RejectController::class)->name('reject');
             Route::post('{person}/wait', Control\Persons\WaitController::class)->name('wait');
-            Route::post('{person}/remove', Control\Persons\RemoveController::class)->name('remove');
+            Route::post('{person}/remove', Control\Persons\RemoveController::class)
+                 ->name('remove')->middleware('can:delete,person');
         });
 
         Route::prefix('photos')->name('photos.')->group(function () {
@@ -49,13 +50,16 @@ Route::prefix('/control')->name('control.')->group(function () {
             Route::post('remove/{photo}', Control\Photos\RemoveController::class)->name('remove');
         });
 
-        Route::prefix('users')->name('users.')->group(function () {
-            Route::get('', Control\Users\ListController::class)->name('list');
-            Route::get('create', Control\Users\EditController::class)->name('create');
-            Route::post('save', Control\Users\SaveController::class)->name('save');
-            Route::get('{user}/edit', Control\Users\EditController::class)->name('edit');
-            Route::post('{user}/update', Control\Users\SaveController::class)->name('update');
-            Route::post('{user}/remove', Control\Users\RemoveController::class)->name('remove');
-        });
+        Route::prefix('users')
+             ->name('users.')
+             ->middleware('can:viewAny,\App\Models\User')
+             ->group(function () {
+                 Route::get('', Control\Users\ListController::class)->name('list');
+                 Route::get('create', Control\Users\EditController::class)->name('create');
+                 Route::post('save', Control\Users\SaveController::class)->name('save');
+                 Route::get('{user}/edit', Control\Users\EditController::class)->name('edit');
+                 Route::post('{user}/update', Control\Users\SaveController::class)->name('update');
+                 Route::post('{user}/remove', Control\Users\RemoveController::class)->name('remove');
+             });
     });
 });

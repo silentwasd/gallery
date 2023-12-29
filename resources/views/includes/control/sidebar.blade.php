@@ -29,12 +29,14 @@
                     </a>
                 </li>
 
-                <li @if (Route::currentRouteName() == 'control.users.list') class="active" @endif>
-                    <a href="{{ route('control.users.list') }}">
-                        <i class="bi bi-shield-lock"></i>
-                        <span class="menu-text">{{ __('control.sidebar.users') }}</span>
-                    </a>
-                </li>
+                @can('viewAny', \App\Models\User::class)
+                    <li @if (Route::currentRouteName() == 'control.users.list') class="active" @endif>
+                        <a href="{{ route('control.users.list') }}">
+                            <i class="bi bi-shield-lock"></i>
+                            <span class="menu-text">{{ __('control.sidebar.users') }}</span>
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </div>
     </div>

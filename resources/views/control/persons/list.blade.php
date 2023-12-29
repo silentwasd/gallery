@@ -40,10 +40,12 @@
 
                         <a href="{{ route('control.persons.edit', $person) }}" class="btn btn-primary">{{ __('control.persons.edit') }}</a>
 
-                        <form class="d-inline" method="post" action="{{ route('control.persons.remove', $person) }}">
-                            @csrf
-                            <button class="btn btn-primary">{{ __('control.persons.remove') }}</button>
-                        </form>
+                        @can('delete', $person)
+                            <form class="d-inline" method="post" action="{{ route('control.persons.remove', $person) }}">
+                                @csrf
+                                <button class="btn btn-primary">{{ __('control.persons.remove') }}</button>
+                            </form>
+                        @endcan
                     </div>
                 </div>
             </div>
