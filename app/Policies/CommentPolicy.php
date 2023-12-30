@@ -11,9 +11,9 @@ class CommentPolicy
 {
     use HandlesAuthorization;
 
-    public function viewNickname(User $user): bool
+    public function viewNickname(User $user, Comment $comment): bool
     {
-        return in_array($user->role, [UserRole::User, UserRole::Moderator, UserRole::Admin]);
+        return $comment->user_id == $user->id || in_array($user->role, [UserRole::Moderator, UserRole::Admin]);
     }
 
     public function create(User $user): bool

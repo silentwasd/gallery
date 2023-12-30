@@ -88,7 +88,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <h6 class="card-title">
-                                                    @can('viewNickname', App\Models\Comment::class)
+                                                    @can('viewNickname', $comment)
                                                         {{ $comment->user->name }}
                                                     @else
                                                         <span class="text-muted">{{ __('person.hidden') }}</span>
