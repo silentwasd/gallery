@@ -24,7 +24,7 @@ class LoginController extends Controller
 
         if (Hash::check($validated['password'], $user->password)) {
             Auth::login($user);
-            return redirect()->route('control.dashboard');
+            return redirect()->route('wall');
         }
 
         return redirect()->back()->with('error', 'Incorrect password');

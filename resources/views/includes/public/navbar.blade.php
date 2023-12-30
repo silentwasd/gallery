@@ -24,30 +24,44 @@
                     </a>
                 </li>
 
-                @guest
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="{{ route('control.auth.show') }}">
-                        {{ __('navbar.login') }}
-                    </a>
-                </li>
-                @endguest
-
-                @auth
+                @can('control')
                     <li class="nav-item">
                         <a class="nav-link"
                            href="{{ route('control.dashboard') }}">
                             {{ __('navbar.dashboard') }}
                         </a>
                     </li>
-                @endauth
+                @endcan
             </ul>
-            <ul class="navbar-nav">
+            <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link fs-5" href="#" onclick="setTheme(getStoredTheme() == 'light' ? 'dark' : 'light')">
-                        <i class="bi bi-brightness-high-fill"></i>
+                    <a class="nav-link" href="#" onclick="setTheme(getStoredTheme() == 'light' ? 'dark' : 'light')">
+                        <i class="bi bi-brightness-high-fill me-1"></i>
+                        {{ __('navbar.switch_theme') }}
                     </a>
                 </li>
+
+                @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('control.auth.show') }}">
+                            <i class="bi bi-box-arrow-in-right me-1"></i>
+                            {{ __('navbar.login') }}
+                        </a>
+                    </li>
+                @endguest
+
+                @auth
+                    <li class="nav-item">
+                        <form id="logoutForm" class="d-inline" method="post" action="{{ route('control.auth.logout') }}">
+                            @csrf
+
+                            <a href="#" class="nav-link" onclick="document.querySelector('#logoutForm').submit()">
+                                <i class="bi bi-box-arrow-right me-1"></i>
+                                {{ __('navbar.logout') }}
+                            </a>
+                        </form>
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>

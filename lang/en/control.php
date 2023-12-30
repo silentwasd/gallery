@@ -11,7 +11,7 @@ return [
     ],
 
     'auth' => [
-        'text'           => 'Login to control panel',
+        'text'           => 'Login',
         'email'          => 'E-mail',
         'password'       => 'Password',
         'enter_password' => 'Enter password',
@@ -67,7 +67,8 @@ return [
         'edit_user'   => 'Edit user',
         'roles'       => [
             'admin'     => 'Administrator',
-            'moderator' => 'Moderator'
+            'moderator' => 'Moderator',
+            'user'      => 'User'
         ]
     ],
 

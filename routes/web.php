@@ -29,7 +29,7 @@ Route::prefix('/control')->name('control.')->group(function () {
         Route::post('logout', Control\Auth\LogoutController::class)->name('logout');
     });
 
-    Route::middleware('auth')->group(function () {
+    Route::middleware(['auth', 'can:control'])->group(function () {
         Route::get('dashboard', Control\DashboardController::class)->name('dashboard');
 
         Route::prefix('persons')->name('persons.')->group(function () {
