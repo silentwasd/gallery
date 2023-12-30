@@ -4,6 +4,7 @@ use App\Http\Controllers\Control;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\SendPerson;
 use App\Http\Controllers\WallController;
+use App\Http\Controllers\Comment;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,10 @@ Route::get('/', WallController::class)->name('wall');
 Route::get('/person/{person}', PersonController::class)->name('person');
 Route::get('/send-person', SendPerson\ShowController::class)->name('send-person.show');
 Route::post('/send-person', SendPerson\SendController::class)->name('send-person.send');
+Route::post('/comments/{comment}/remove', Comment\RemoveController::class)
+    ->name('comments.remove')
+    ->middleware('can:delete,comment');
+Route::post('/comments/{person}', Comment\CreateController::class)->name('comments.create');
 
 Route::prefix('/control')->name('control.')->group(function () {
     Route::prefix('auth')->name('auth.')->group(function () {

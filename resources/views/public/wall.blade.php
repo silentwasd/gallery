@@ -49,9 +49,27 @@
                                 </div>
                             @endif
 
-                            <a href="{{ route('person', $person) }}" class="btn btn-primary stretched-link">
-                                {{ __('person.open_page') }}
-                            </a>
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <a href="{{ route('person', $person) }}" class="btn btn-primary stretched-link">
+                                        {{ __('person.open_page') }}
+                                    </a>
+                                </div>
+
+                                @if ($person->photos_count > 0)
+                                    <div class="col-auto fs-5">
+                                        <i class="bi bi-image me-1"></i>
+                                        <span>{{ $person->photos_count }}</span>
+                                    </div>
+                                @endif
+
+                                @if ($person->comments_count > 0)
+                                    <div class="col-auto fs-5">
+                                        <i class="bi bi-chat-fill me-1"></i>
+                                        <span>{{ $person->comments_count }}</span>
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>

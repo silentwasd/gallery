@@ -8,6 +8,8 @@
 
         <h3 class="mt-3">{{ $person->nickname }}</h3>
 
+        <hr>
+
         <h5>{{ __('person.description') }}</h5>
 
         @foreach(explode("\n", $person->description) as $paragraph)
@@ -44,6 +46,81 @@
                         </a>
                     </div>
                 @endforeach
+            </div>
+        @endif
+
+        <div class="position-relative">
+            <div class="position-absolute w-100" id="comments" style="margin-top: -5rem; padding-top: 5rem;"></div>
+        </div>
+
+        @if ($person->comments->count() > 0 || Auth::user()->can('create', App\Models\Comment::class))
+            <h5>{{ __('person.comments') }}</h5>
+
+            <div class="row g-3">
+                @can('create', App\Models\Comment::class)
+                    <div class="col-12 col-lg-6 order-lg-1">
+                        <div class="card sticky-lg-top top-0 top-lg-5rem">
+                            <div class="card-body">
+                                <form method="post" action="{{ route('comments.create', $person) }}">
+                                    @csrf
+
+                                    <div class="mb-3">
+                                        <label class="form-label" for="comment">
+                                            {{ __('person.new_comment') }}
+                                        </label>
+                                        <textarea id="comment" class="form-control" rows="4" name="text"
+                                                  placeholder="{{ __('person.new_comment_placeholder') }}"></textarea>
+                                    </div>
+
+                                    <button class="btn btn-primary">{{ __('person.submit') }}</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                @endcan
+
+                <div class="col-12 @can('create', App\Models\Comment::class) col-lg-6 @endcan order-lg-0">
+                    <div class="row gy-3">
+                        @foreach ($person->comments as $comment)
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h6 class="card-title">
+                                                    @can('viewNickname', App\Models\Comment::class)
+                                                        {{ $comment->user->name }}
+                                                    @else
+                                                        <span class="text-muted">{{ __('person.hidden') }}</span>
+                                                    @endcan
+                                                </h6>
+                                            </div>
+
+                                            <div class="col-auto">
+                                                {{ $comment->created_at->diffForHumans() }}
+                                            </div>
+                                        </div>
+
+                                        @foreach (explode("\n", $comment->text) as $line)
+                                            <p class="card-text">{{ $line }}</p>
+                                        @endforeach
+
+                                        @can('delete', $comment)
+                                            <form method="post" action="{{ route('comments.remove', $comment) }}">
+                                                @csrf
+
+                                                <button class="btn btn-sm btn-danger">
+                                                    <i class="bi bi-trash-fill"></i>
+                                                    {{ __('person.remove') }}
+                                                </button>
+                                            </form>
+                                        @endcan
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         @endif
     </div>

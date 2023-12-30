@@ -35,7 +35,7 @@ class WallController extends Controller
 
         $persons = $persons->latest()
                            ->with('tags')
-                           ->withCount('photos')
+                           ->withCount('photos', 'comments')
                            ->paginate(10)
                            ->withQueryString();
 

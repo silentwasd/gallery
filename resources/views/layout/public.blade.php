@@ -13,6 +13,12 @@
                 height: 250px;
             }
         }
+
+        @media (min-width: 992px) {
+            .top-lg-5rem {
+                top: 5rem !important;
+            }
+        }
     </style>
 </head>
 <body>

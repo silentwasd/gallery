@@ -24,4 +24,9 @@ class Person extends Model
             ->withPivot('order')
             ->orderBy('order');
     }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class)->latest();
+    }
 }
