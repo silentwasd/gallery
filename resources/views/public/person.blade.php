@@ -58,7 +58,7 @@
 
             <div class="row g-3">
                 @can('create', App\Models\Comment::class)
-                    <div class="col-12 col-lg-6 order-lg-1">
+                    <div class="col-12 @if ($person->comments->count() > 0) col-lg-6 @endif order-lg-1">
                         <div class="card sticky-lg-top top-0 top-lg-5rem">
                             <div class="card-body">
                                 <form method="post" action="{{ route('comments.create', $person) }}">
