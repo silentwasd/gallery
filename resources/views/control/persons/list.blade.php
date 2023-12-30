@@ -38,6 +38,25 @@
                             <p>{{ $paragraph }}</p>
                         @endforeach
 
+                        @if ($person->photos_count > 0)
+                            <h6 class="mb-3">Photos: {{ $person->photos_count }}</h6>
+                        @endif
+
+                        @if ($person->tags->count() > 0)
+                            <h6>Tags:</h6>
+
+                            <div class="row g-2 mb-3">
+                                @foreach ($person->tags as $tag)
+                                    <div class="col-auto">
+                                        <span class="badge bg-secondary fs-6">
+                                            <i class="bi bi-tag-fill"></i>
+                                            {{ $tag->name }}
+                                        </span>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+
                         <a href="{{ route('control.persons.edit', $person) }}" class="btn btn-primary">{{ __('control.persons.edit') }}</a>
 
                         @can('delete', $person)

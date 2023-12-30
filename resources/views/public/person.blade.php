@@ -14,11 +14,26 @@
             <p>{{ $paragraph }}</p>
         @endforeach
 
-        @if ($person->photos()->count() > 0)
+        @if ($person->tags->count() > 0)
+            <h5>{{ __('person.tags') }}</h5>
+
+            <div class="row mb-3 g-2">
+                @foreach ($person->tags as $tag)
+                    <div class="col-auto">
+                        <span class="badge badge-lg bg-secondary fs-6">
+                            <i class="bi bi-tag-fill"></i>
+                            {{ $tag->name }}
+                        </span>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+
+        @if ($person->photos->count() > 0)
             <h5>{{ __('person.photos') }}</h5>
 
             <div class="row mb-3 gy-4">
-                @foreach($person->photos()->get() as $photo)
+                @foreach($person->photos as $photo)
                     <div class="col-12 col-md-6 col-lg-4">
                         <a href="#"
                            data-bs-toggle="modal"

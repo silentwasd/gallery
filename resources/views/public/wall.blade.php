@@ -25,7 +25,20 @@
                                 <p>{{ $paragraph }}</p>
                             @endforeach
 
-                            @if ($person->photos()->count() > 0)
+                            @if ($person->tags->count() > 0)
+                                <div class="row mb-3 g-2">
+                                    @foreach ($person->tags as $tag)
+                                        <div class="col-auto">
+                                            <span class="badge bg-secondary fs-6">
+                                                <i class="bi bi-tag-fill"></i>
+                                                {{ $tag->name }}
+                                            </span>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            @if ($person->photos_count > 0)
                                 <div class="row mb-3 gy-4">
                                     @foreach($person->photos()->limit(3)->get() as $photo)
                                         <div class="col-12 col-md-6 col-lg-4">

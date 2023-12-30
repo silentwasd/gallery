@@ -5,5 +5,6 @@ return [
     'go_back'     => 'Go back',
     'description' => 'Description',
     'photos'      => 'Photos',
-    'photo'       => 'Photo'
+    'photo'       => 'Photo',
+    'tags'        => 'Tags'
 ];

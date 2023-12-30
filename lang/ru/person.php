@@ -5,5 +5,6 @@ return [
     'go_back'     => 'Вернуться',
     'description' => 'Описание',
     'photos'      => 'Фото',
-    'photo'       => 'Фото'
+    'photo'       => 'Фото',
+    'tags'        => 'Теги'
 ];

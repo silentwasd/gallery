@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\PersonState;
 use App\Models\Person;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class WallController extends Controller
@@ -14,13 +15,29 @@ class WallController extends Controller
             'search' => 'nullable|string|max:255'
         ]);
 
-        $search = $validated['search'] ?? '';
+        $search      = $validated['search'] ?? '';
+        $searchParts = collect(explode(',', $search))->map(fn(string $part) => trim($part))->all();
 
-        $persons = Person::where('state', PersonState::Accepted)
-                         ->where('nickname', 'LIKE', "%$search%")
-                         ->latest()
-                         ->paginate(10)
-                         ->withQueryString();
+        $persons = Person::where('state', PersonState::Accepted);
+
+        if (count($searchParts) > 1) {
+            $persons->whereHas('tags', function (Builder $query) use ($searchParts) {
+                $query->whereIn('name', $searchParts);
+            });
+        } else {
+            $persons->where(function (Builder $query) use ($search) {
+                $query->where('nickname', 'LIKE', "%$search%")
+                    ->orWhereHas('tags', function (Builder $query) use ($search) {
+                        $query->where('name', $search);
+                    });
+            });
+        }
+
+        $persons = $persons->latest()
+                           ->with('tags')
+                           ->withCount('photos')
+                           ->paginate(10)
+                           ->withQueryString();
 
         return view('public.wall', [
             'persons' => $persons,

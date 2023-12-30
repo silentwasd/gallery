@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'search' => 'Find by nickname',
+    'search' => 'Find by nickname, tags',
     'find'   => 'Find'
 ];

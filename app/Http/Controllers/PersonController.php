@@ -12,6 +12,8 @@ class PersonController extends Controller
         if ($person->state != PersonState::Accepted)
             abort(404);
 
+        $person->with('photos', 'tags');
+
         return view('public.person', compact('person'));
     }
 }

@@ -9,7 +9,10 @@ class ListController extends Controller
 {
     public function __invoke()
     {
-        $persons = Person::latest()->get();
+        $persons = Person::latest()
+                         ->with('tags')
+                         ->withCount('photos')
+                         ->get();
 
         return view('control.persons.list', compact('persons'));
     }
