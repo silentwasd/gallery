@@ -39,11 +39,11 @@
                         @endforeach
 
                         @if ($person->photos_count > 0)
-                            <h6 class="mb-3">Photos: {{ $person->photos_count }}</h6>
+                            <h6 class="mb-3">{{ __('control.persons.photos') }}: {{ $person->photos_count }}</h6>
                         @endif
 
                         @if ($person->tags->count() > 0)
-                            <h6>Tags:</h6>
+                            <h6>{{ __('control.persons.tags') }}:</h6>
 
                             <div class="row g-2 mb-3">
                                 @foreach ($person->tags as $tag)
