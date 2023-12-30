@@ -43,7 +43,7 @@
 
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('control.auth.show') }}">
+                        <a class="nav-link" href="{{ route('control.auth.show', ['from' => Request::path()]) }}">
                             <i class="bi bi-box-arrow-in-right me-1"></i>
                             {{ __('navbar.login') }}
                         </a>
@@ -52,7 +52,7 @@
 
                 @auth
                     <li class="nav-item">
-                        <form id="logoutForm" class="d-inline" method="post" action="{{ route('control.auth.logout') }}">
+                        <form id="logoutForm" class="d-inline" method="post" action="{{ route('control.auth.logout', 'back') }}">
                             @csrf
 
                             <a href="#" class="nav-link" onclick="document.querySelector('#logoutForm').submit()">

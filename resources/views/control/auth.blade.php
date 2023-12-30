@@ -49,6 +49,10 @@
                 </a>
                 <h5 class="my-4">{{ __('control.auth.text') }}</h5>
 
+                @if (Request::query('from'))
+                    <input type="hidden" name="from" value="{{ Request::query('from') }}" />
+                @endif
+
                 <div class="mb-3">
                     <label class="form-label" for="email">{{ __('control.auth.email') }}</label>
                     <input id="email" type="email" name="email"

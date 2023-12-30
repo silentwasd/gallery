@@ -14,7 +14,8 @@ class LoginController extends Controller
     {
         $validated = $request->validate([
             'email'    => 'required|email',
-            'password' => 'required|min:8'
+            'password' => 'required|min:8',
+            'from'     => 'nullable|string'
         ]);
 
         $user = User::where('email', $validated['email'])->first();
@@ -24,6 +25,10 @@ class LoginController extends Controller
 
         if (Hash::check($validated['password'], $user->password)) {
             Auth::login($user);
+
+            if ($validated['from'])
+                return redirect($validated['from']);
+
             return redirect()->route('wall');
         }
 
