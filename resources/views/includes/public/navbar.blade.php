@@ -35,7 +35,7 @@
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="setTheme(getStoredTheme() == 'light' ? 'dark' : 'light')">
+                    <a class="nav-link" href="#" onclick="setThemeBtn(event)">
                         <i class="bi bi-brightness-high-fill me-1"></i>
                         {{ __('navbar.switch_theme') }}
                     </a>

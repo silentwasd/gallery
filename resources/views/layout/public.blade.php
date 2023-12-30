@@ -59,6 +59,11 @@
     }
 
     setTheme(getPreferredTheme())
+
+    function setThemeBtn(e) {
+        e.preventDefault();
+        setTheme(getStoredTheme() == 'light' ? 'dark' : 'light');
+    }
 </script>
 </body>
 </html>
