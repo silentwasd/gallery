@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand active-on-light" href="#" style="display: none;">
+        <a class="navbar-brand active-on-light" href="{{ route('wall') }}" style="display: none;">
             <img src="/storage/logo/brand.png" height="30" />
         </a>
-        <a class="navbar-brand active-on-dark" href="#" style="display: none;">
+        <a class="navbar-brand active-on-dark" href="{{ route('wall') }}" style="display: none;">
             <img src="/storage/logo/dark-brand.png" height="30" />
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
